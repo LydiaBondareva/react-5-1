@@ -1,0 +1,28 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-item {
+  background-color: #ffebee;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  border: 1px solid #f48fb1;
+}
+
+.list-item:hover {
+  background-color: #f8bbd0;
+}

@@ -1,0 +1,11 @@
+{
+  "products": {
+    "1":
+     { "title": "phone",
+      "views": 100},
+    "2":
+      {"title": "TV",
+      "views": 200}
+    }
+}
+
