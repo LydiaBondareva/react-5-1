@@ -112,7 +112,11 @@ function App() {
 					value={searchValue}
 				/>
 			</div>
-			<button className={styles.searchBtn} onClick={() => setSorted(!sorted)}>
+			<button
+				className={styles.searchBtn}
+				onClick={() => setSorted(!sorted)}
+				disabled={filteredTodos.length < 2}
+			>
 				{sorted ? 'Отменить сортировку' : 'Сортировать по алфавиту'}
 			</button>
 			<ul className={styles.list}>

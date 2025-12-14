@@ -147,3 +147,7 @@
   background-color: #7e57c2;
   box-shadow: 0 4px 6px rgba(121, 93, 198, 0.2);
 }
+
+.searchBtn:disabled{
+	background-color:#b0acb7;
+}
