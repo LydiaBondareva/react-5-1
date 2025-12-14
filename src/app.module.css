@@ -21,8 +21,129 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
   border: 1px solid #f48fb1;
+	display: flex;
+  align-items: center;
+  justify-content: space-between;
+	font-size: 1.2rem;
+	color: #72062a;
 }
 
-.list-item:hover {
-  background-color: #f8bbd0;
+
+.addContainer {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.addTodo, .search{
+  flex-grow: 1;
+	min-width: 340px;
+  padding: 12px 16px;
+  border: 1px solid #f48fb1;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addTodo:focus {
+  border-color: #f06292;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.addBtn, .searchBtn {
+  background-color: #f48fb1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.addBtn:hover {
+  background-color: #f06292;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.addBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.editButton,
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  color: #f48fb1;
+    outline: none;
+}
+
+.editButton svg,
+.deleteButton svg {
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+
+.editButton:hover,
+.deleteButton:hover {
+  background-color: rgba(241, 103, 149, 0.2);
+}
+
+.list-item:hover .editButton,
+.list-item:hover .deleteButton {
+    color: #c2185b;
+		transition: color 0.3s ease;
+}
+
+.changeInp {
+  flex-grow: 1;
+  padding: 7px 16px;
+  border: 1px solid #f48fb1;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 8px;
+	 box-sizing: border-box;
+}
+
+.changeInp:focus {
+  border-color: #f06292;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search {
+  border-color: #b39ddb;
+}
+
+.search:focus {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.searchBtn {
+  background-color: #9575cd;
+  color: white;
+  width: 50%;
+	margin-right: 10px;
+}
+
+.searchBtn:hover {
+  background-color: #7e57c2;
+  box-shadow: 0 4px 6px rgba(121, 93, 198, 0.2);
 }
