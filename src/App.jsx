@@ -12,6 +12,7 @@ function App() {
 	const [sorted, setSorted] = useState(false);
 
 	const changeInpRef = useRef(null);
+
 	const filteredTodos = !sorted
 		? todos.filter((task) => task.title.includes(searchValue))
 		: todos
@@ -34,13 +35,9 @@ function App() {
 		setRefreshTodosFlag(!refreshTodosFlag);
 	}
 
-	function onChange(event) {
-		setAddedTodo(event.target.value);
-	}
-
-	function postOnEnter(event) {
+	function onEnter(event, func, id) {
 		if (event.key === 'Enter') {
-			postTodo();
+			func(id);
 		}
 	}
 
@@ -75,32 +72,21 @@ function App() {
 			body: JSON.stringify({
 				title: newTaskValue,
 			}),
-		}).then(refreshTodos);
-	}
-
-	function onInpTaskChange(event) {
-		setNewTaskValue(event.target.value);
-	}
-
-	function updateOnEnter(event, id) {
-		if (event.key === 'Enter') {
-			changeTodo(id);
+		}).then(() => {
+			setTodos((prevTodos) =>
+				prevTodos.map((todo) =>
+					todo.id === id ? { ...todo, title: newTaskValue } : todo,
+				),
+			);
 			setShowInput('');
-			setNewTaskValue('title');
-		}
+			refreshTodos();
+		});
 	}
 
 	function deleteTodo(id) {
 		fetch(`http://localhost:3000/todos/${id}`, {
 			method: 'DELETE',
 		}).then(refreshTodos);
-	}
-	function serchValueChange(event) {
-		setSearchValue(event.target.value);
-	}
-
-	function sortTasks() {
-		setSorted(!sorted);
 	}
 
 	return (
@@ -111,8 +97,8 @@ function App() {
 					className={styles.addTodo}
 					placeholder="Введите новое дело..."
 					value={addedTodo}
-					onKeyDown={postOnEnter}
-					onChange={onChange}
+					onKeyDown={(event) => onEnter(event, postTodo)}
+					onChange={(event) => setAddedTodo(event.target.value)}
 				/>
 				<button onClick={postTodo} className={styles.addBtn}>
 					Добавить в список
@@ -120,12 +106,13 @@ function App() {
 			</div>
 			<div className={styles.addContainer}>
 				<input
-					onChange={serchValueChange}
+					onChange={(event) => setSearchValue(event.target.value)}
 					className={styles.search}
 					placeholder="Введите текст для поиска..."
+					value={searchValue}
 				/>
 			</div>
-			<button className={styles.searchBtn} onClick={sortTasks}>
+			<button className={styles.searchBtn} onClick={() => setSorted(!sorted)}>
 				{sorted ? 'Отменить сортировку' : 'Сортировать по алфавиту'}
 			</button>
 			<ul className={styles.list}>
@@ -136,8 +123,9 @@ function App() {
 							<input
 								ref={changeInpRef}
 								value={newTaskValue}
-								onChange={onInpTaskChange}
-								onKeyDown={(event) => updateOnEnter(event, todo.id)}
+								onChange={(event) => setNewTaskValue(event.target.value)}
+								onKeyDown={(event) => onEnter(event, changeTodo, todo.id)}
+								onBlur={() => changeTodo(todo.id)}
 								type="text"
 								className={styles.changeInp}
 							/>
@@ -155,6 +143,9 @@ function App() {
 						</div>
 					</li>
 				))}
+				{!filteredTodos.length &&
+					searchValue &&
+					'К сожалению, по данному запросу дел не обнаружено'}
 			</ul>
 		</div>
 	);
